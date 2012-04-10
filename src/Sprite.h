@@ -10,31 +10,21 @@
 #ifndef _SPRITE_H_
 #define _SPRITE_H_
 
+#include "SDL.h"
 #include "includes.h"
-#include <map>
 
 class Sprite {
+public:
+    Sprite(const std::string& filename, int x, int y, int w, int h);
+    Sprite(const std::string& filename, SDL_Rect rect);
 
+    void move(int x, int y);
+    void paint();
+
+private:
+    void init(const std::string&, SDL_Rect);
+    SDL_Rect rect;
+    sharedPtr(SDL_Texture) texture;
 };
-
-class TextureManager {
-    protected:
-        // only TexManager can instantiate it, so proctected
-        TextureManager();
-    public:
-        static TextureManager * get();
-        
-        // these could be statics if I wanted to, but I prefer get()->
-        sharedPtr(SDL_Texture) getTexture(const std::string&);
-        bool hasTexture(const std::string&);
-        void loadTexture(const std::string& filename);
-
-    private:
-        std::map<std::string, sharedPtr(SDL_Texture)> textureMap;
-        typedef std::map<std::string, sharedPtr(SDL_Texture)>::iterator textureMapIterator;
-        typedef std::pair<std::string, sharedPtr(SDL_Texture)> textureMapPair;
-};
-
-
 
 #endif

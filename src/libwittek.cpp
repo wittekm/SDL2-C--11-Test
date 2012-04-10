@@ -9,6 +9,7 @@
  
 #include "libwittek.h"
 #include <iostream>
+#include <algorithm>
 using std::string;
 
 
@@ -28,4 +29,17 @@ ResourceException::ResourceException(std::string source, std::string explanation
 
 const char* ResourceException::what() const throw() {
     return source.c_str();
+}
+
+string toLower(string s) {
+    transform(s.begin(), s.end(), s.begin(), tolower);
+    return s;
+}
+
+bool contains(const string& s, const string& query) {
+    return s.find(query) != string::npos;
+}
+
+bool containsFromEnd(const string& s, const string& query) {
+    return s.find_last_of(query) != string::npos;
 }

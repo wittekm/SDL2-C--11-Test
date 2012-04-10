@@ -1,128 +1,120 @@
-src/Sprite.d: ../src/Sprite.cpp ../src/Sprite.h ../src/includes.h \
- ../src/libwittek.h ../src/CApp.h \
- /Users/max/Downloads/SDL-2.0.0-6302/include/SDL.h \
- /Users/max/Downloads/SDL-2.0.0-6302/include/SDL_main.h \
- /Users/max/Downloads/SDL-2.0.0-6302/include/SDL_stdinc.h \
- /Users/max/Downloads/SDL-2.0.0-6302/include/SDL_config.h \
- /Users/max/Downloads/SDL-2.0.0-6302/include/SDL_platform.h \
- /Users/max/Downloads/SDL-2.0.0-6302/include/begin_code.h \
- /Users/max/Downloads/SDL-2.0.0-6302/include/close_code.h \
- /Users/max/Downloads/SDL-2.0.0-6302/include/SDL_assert.h \
- /Users/max/Downloads/SDL-2.0.0-6302/include/SDL_atomic.h \
- /Users/max/Downloads/SDL-2.0.0-6302/include/SDL_audio.h \
- /Users/max/Downloads/SDL-2.0.0-6302/include/SDL_error.h \
- /Users/max/Downloads/SDL-2.0.0-6302/include/SDL_endian.h \
- /Users/max/Downloads/SDL-2.0.0-6302/include/SDL_mutex.h \
- /Users/max/Downloads/SDL-2.0.0-6302/include/SDL_thread.h \
- /Users/max/Downloads/SDL-2.0.0-6302/include/SDL_rwops.h \
- /Users/max/Downloads/SDL-2.0.0-6302/include/SDL_clipboard.h \
- /Users/max/Downloads/SDL-2.0.0-6302/include/SDL_cpuinfo.h \
- /Users/max/Downloads/SDL-2.0.0-6302/include/SDL_events.h \
- /Users/max/Downloads/SDL-2.0.0-6302/include/SDL_video.h \
- /Users/max/Downloads/SDL-2.0.0-6302/include/SDL_pixels.h \
- /Users/max/Downloads/SDL-2.0.0-6302/include/SDL_rect.h \
- /Users/max/Downloads/SDL-2.0.0-6302/include/SDL_surface.h \
- /Users/max/Downloads/SDL-2.0.0-6302/include/SDL_blendmode.h \
- /Users/max/Downloads/SDL-2.0.0-6302/include/SDL_keyboard.h \
- /Users/max/Downloads/SDL-2.0.0-6302/include/SDL_keycode.h \
- /Users/max/Downloads/SDL-2.0.0-6302/include/SDL_scancode.h \
- /Users/max/Downloads/SDL-2.0.0-6302/include/SDL_mouse.h \
- /Users/max/Downloads/SDL-2.0.0-6302/include/SDL_joystick.h \
- /Users/max/Downloads/SDL-2.0.0-6302/include/SDL_quit.h \
- /Users/max/Downloads/SDL-2.0.0-6302/include/SDL_gesture.h \
- /Users/max/Downloads/SDL-2.0.0-6302/include/SDL_touch.h \
- /Users/max/Downloads/SDL-2.0.0-6302/include/SDL_hints.h \
- /Users/max/Downloads/SDL-2.0.0-6302/include/SDL_loadso.h \
- /Users/max/Downloads/SDL-2.0.0-6302/include/SDL_log.h \
- /Users/max/Downloads/SDL-2.0.0-6302/include/SDL_power.h \
- /Users/max/Downloads/SDL-2.0.0-6302/include/SDL_render.h \
- /Users/max/Downloads/SDL-2.0.0-6302/include/SDL_timer.h \
- /Users/max/Downloads/SDL-2.0.0-6302/include/SDL_version.h \
+src/Sprite.d: ../src/Sprite.cpp ../src/Sprite.h \
+ /usr/local/include/SDL2/SDL.h /usr/local/include/SDL2/SDL_main.h \
+ /usr/local/include/SDL2/SDL_stdinc.h \
+ /usr/local/include/SDL2/SDL_config.h \
+ /usr/local/include/SDL2/SDL_platform.h \
+ /usr/local/include/SDL2/begin_code.h \
+ /usr/local/include/SDL2/close_code.h \
+ /usr/local/include/SDL2/SDL_assert.h \
+ /usr/local/include/SDL2/SDL_atomic.h /usr/local/include/SDL2/SDL_audio.h \
+ /usr/local/include/SDL2/SDL_error.h /usr/local/include/SDL2/SDL_endian.h \
+ /usr/local/include/SDL2/SDL_mutex.h /usr/local/include/SDL2/SDL_thread.h \
+ /usr/local/include/SDL2/SDL_rwops.h \
+ /usr/local/include/SDL2/SDL_clipboard.h \
+ /usr/local/include/SDL2/SDL_cpuinfo.h \
+ /usr/local/include/SDL2/SDL_events.h /usr/local/include/SDL2/SDL_video.h \
+ /usr/local/include/SDL2/SDL_pixels.h /usr/local/include/SDL2/SDL_rect.h \
+ /usr/local/include/SDL2/SDL_surface.h \
+ /usr/local/include/SDL2/SDL_blendmode.h \
+ /usr/local/include/SDL2/SDL_keyboard.h \
+ /usr/local/include/SDL2/SDL_keycode.h \
+ /usr/local/include/SDL2/SDL_scancode.h \
+ /usr/local/include/SDL2/SDL_mouse.h \
+ /usr/local/include/SDL2/SDL_joystick.h \
+ /usr/local/include/SDL2/SDL_quit.h /usr/local/include/SDL2/SDL_gesture.h \
+ /usr/local/include/SDL2/SDL_touch.h /usr/local/include/SDL2/SDL_hints.h \
+ /usr/local/include/SDL2/SDL_loadso.h /usr/local/include/SDL2/SDL_log.h \
+ /usr/local/include/SDL2/SDL_power.h /usr/local/include/SDL2/SDL_render.h \
+ /usr/local/include/SDL2/SDL_timer.h \
+ /usr/local/include/SDL2/SDL_version.h ../src/includes.h \
+ ../src/libwittek.h ../src/TextureManager.h ../src/capp.h \
  ../src/LocationMap.h ../src/Tile.h
 
 ../src/Sprite.h:
+
+/usr/local/include/SDL2/SDL.h:
+
+/usr/local/include/SDL2/SDL_main.h:
+
+/usr/local/include/SDL2/SDL_stdinc.h:
+
+/usr/local/include/SDL2/SDL_config.h:
+
+/usr/local/include/SDL2/SDL_platform.h:
+
+/usr/local/include/SDL2/begin_code.h:
+
+/usr/local/include/SDL2/close_code.h:
+
+/usr/local/include/SDL2/SDL_assert.h:
+
+/usr/local/include/SDL2/SDL_atomic.h:
+
+/usr/local/include/SDL2/SDL_audio.h:
+
+/usr/local/include/SDL2/SDL_error.h:
+
+/usr/local/include/SDL2/SDL_endian.h:
+
+/usr/local/include/SDL2/SDL_mutex.h:
+
+/usr/local/include/SDL2/SDL_thread.h:
+
+/usr/local/include/SDL2/SDL_rwops.h:
+
+/usr/local/include/SDL2/SDL_clipboard.h:
+
+/usr/local/include/SDL2/SDL_cpuinfo.h:
+
+/usr/local/include/SDL2/SDL_events.h:
+
+/usr/local/include/SDL2/SDL_video.h:
+
+/usr/local/include/SDL2/SDL_pixels.h:
+
+/usr/local/include/SDL2/SDL_rect.h:
+
+/usr/local/include/SDL2/SDL_surface.h:
+
+/usr/local/include/SDL2/SDL_blendmode.h:
+
+/usr/local/include/SDL2/SDL_keyboard.h:
+
+/usr/local/include/SDL2/SDL_keycode.h:
+
+/usr/local/include/SDL2/SDL_scancode.h:
+
+/usr/local/include/SDL2/SDL_mouse.h:
+
+/usr/local/include/SDL2/SDL_joystick.h:
+
+/usr/local/include/SDL2/SDL_quit.h:
+
+/usr/local/include/SDL2/SDL_gesture.h:
+
+/usr/local/include/SDL2/SDL_touch.h:
+
+/usr/local/include/SDL2/SDL_hints.h:
+
+/usr/local/include/SDL2/SDL_loadso.h:
+
+/usr/local/include/SDL2/SDL_log.h:
+
+/usr/local/include/SDL2/SDL_power.h:
+
+/usr/local/include/SDL2/SDL_render.h:
+
+/usr/local/include/SDL2/SDL_timer.h:
+
+/usr/local/include/SDL2/SDL_version.h:
 
 ../src/includes.h:
 
 ../src/libwittek.h:
 
-../src/CApp.h:
+../src/TextureManager.h:
 
-/Users/max/Downloads/SDL-2.0.0-6302/include/SDL.h:
-
-/Users/max/Downloads/SDL-2.0.0-6302/include/SDL_main.h:
-
-/Users/max/Downloads/SDL-2.0.0-6302/include/SDL_stdinc.h:
-
-/Users/max/Downloads/SDL-2.0.0-6302/include/SDL_config.h:
-
-/Users/max/Downloads/SDL-2.0.0-6302/include/SDL_platform.h:
-
-/Users/max/Downloads/SDL-2.0.0-6302/include/begin_code.h:
-
-/Users/max/Downloads/SDL-2.0.0-6302/include/close_code.h:
-
-/Users/max/Downloads/SDL-2.0.0-6302/include/SDL_assert.h:
-
-/Users/max/Downloads/SDL-2.0.0-6302/include/SDL_atomic.h:
-
-/Users/max/Downloads/SDL-2.0.0-6302/include/SDL_audio.h:
-
-/Users/max/Downloads/SDL-2.0.0-6302/include/SDL_error.h:
-
-/Users/max/Downloads/SDL-2.0.0-6302/include/SDL_endian.h:
-
-/Users/max/Downloads/SDL-2.0.0-6302/include/SDL_mutex.h:
-
-/Users/max/Downloads/SDL-2.0.0-6302/include/SDL_thread.h:
-
-/Users/max/Downloads/SDL-2.0.0-6302/include/SDL_rwops.h:
-
-/Users/max/Downloads/SDL-2.0.0-6302/include/SDL_clipboard.h:
-
-/Users/max/Downloads/SDL-2.0.0-6302/include/SDL_cpuinfo.h:
-
-/Users/max/Downloads/SDL-2.0.0-6302/include/SDL_events.h:
-
-/Users/max/Downloads/SDL-2.0.0-6302/include/SDL_video.h:
-
-/Users/max/Downloads/SDL-2.0.0-6302/include/SDL_pixels.h:
-
-/Users/max/Downloads/SDL-2.0.0-6302/include/SDL_rect.h:
-
-/Users/max/Downloads/SDL-2.0.0-6302/include/SDL_surface.h:
-
-/Users/max/Downloads/SDL-2.0.0-6302/include/SDL_blendmode.h:
-
-/Users/max/Downloads/SDL-2.0.0-6302/include/SDL_keyboard.h:
-
-/Users/max/Downloads/SDL-2.0.0-6302/include/SDL_keycode.h:
-
-/Users/max/Downloads/SDL-2.0.0-6302/include/SDL_scancode.h:
-
-/Users/max/Downloads/SDL-2.0.0-6302/include/SDL_mouse.h:
-
-/Users/max/Downloads/SDL-2.0.0-6302/include/SDL_joystick.h:
-
-/Users/max/Downloads/SDL-2.0.0-6302/include/SDL_quit.h:
-
-/Users/max/Downloads/SDL-2.0.0-6302/include/SDL_gesture.h:
-
-/Users/max/Downloads/SDL-2.0.0-6302/include/SDL_touch.h:
-
-/Users/max/Downloads/SDL-2.0.0-6302/include/SDL_hints.h:
-
-/Users/max/Downloads/SDL-2.0.0-6302/include/SDL_loadso.h:
-
-/Users/max/Downloads/SDL-2.0.0-6302/include/SDL_log.h:
-
-/Users/max/Downloads/SDL-2.0.0-6302/include/SDL_power.h:
-
-/Users/max/Downloads/SDL-2.0.0-6302/include/SDL_render.h:
-
-/Users/max/Downloads/SDL-2.0.0-6302/include/SDL_timer.h:
-
-/Users/max/Downloads/SDL-2.0.0-6302/include/SDL_version.h:
+../src/capp.h:
 
 ../src/LocationMap.h:
 

@@ -25,4 +25,10 @@ class ResourceException {
 };
 
 
+std::string toLower(std::string orig);
+
+bool contains(const std::string& s, const std::string& query);
+bool containsFromEnd(const std::string& s, const std::string& query);
+
+
 #endif

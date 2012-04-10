@@ -11,6 +11,8 @@
 #include "libwittek.h"
 #include "LocationMap.h"
 #include "Sprite.h"
+
+#include "SDL_ttf.h"
  
 CApp::CApp() :
 map(8, 9, 24) {
@@ -21,6 +23,8 @@ int CApp::exec() {
     if(init() == false) {
         return -1;
     }
+
+    s = new Sprite("icon.bmp", {20, 20, 32, 32});
  
     SDL_Event Event;
  
@@ -64,6 +68,7 @@ void CApp::render() {
         }
     }
     
+    /*
     SDL_Rect drawRect;
     drawRect.x = 20;
     drawRect.y = 20;
@@ -71,6 +76,8 @@ void CApp::render() {
     drawRect.h = 16;
     SDL_RenderFillRect(renderer, &drawRect);
     SDL_RenderCopy(renderer, texture.get(), NULL, &drawRect);
+    */
+    s->paint();
 
     // Up until now everything was drawn behind the scenes.
     // This will show the new, red contents of the window.
@@ -86,6 +93,8 @@ void CApp::onEvent(SDL_Event* event) {
     if(event->type == SDL_MOUSEBUTTONDOWN) {
         sharedPtr(Tile) t = map.getFromPixels(event->button.x, event->button.y).lock();
         t->setDerp(!t->getDerp());
+
+        s->move(event->button.x, event->button.y);
     }
 }
 
@@ -93,6 +102,12 @@ bool CApp::init() {
     
     if(SDL_Init(SDL_INIT_EVERYTHING) < 0)
         return false;
+
+
+    if(TTF_Init()==-1) {
+        printf("TTF_Init: %s\n", TTF_GetError());
+        exit(2);
+    }
         
     window = SDL_CreateWindow("SDL_RenderClear",
                 SDL_WINDOWPOS_CENTERED, 
@@ -102,21 +117,23 @@ bool CApp::init() {
                 
     renderer = SDL_CreateRenderer(window, -1, 0);
     
+    /*
     debug("-----");
     debug(TextureManager::get()->hasTexture("icon.bmp"));
     TextureManager::get()->loadTexture("icon.bmp");
     texture = TextureManager::get()->getTexture("icon.bmp");
     debug(TextureManager::get()->hasTexture("icon.bmp"));
     debug("-----");
+    */
 
     return true;
 }
 
-CApp& CApp::get() {
+CApp * CApp::get() {
     static CApp * instance;
     if(!instance)
         instance = new CApp;
-    return *instance;
+    return instance;
 }
 
 SDL_Renderer * CApp::getRenderer() {
@@ -125,9 +142,9 @@ SDL_Renderer * CApp::getRenderer() {
 
  
 int main(int argc, char* argv[]) {
-    CApp& app = CApp::get();
+    CApp * app = CApp::get();
     
     debug("hey");
  
-    return app.exec();
+    return app->exec();
 }

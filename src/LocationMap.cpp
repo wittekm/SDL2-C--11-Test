@@ -34,8 +34,8 @@ LocationMap::LocationMap(int rows, int cols, int size):
 void LocationMap::initTiles() {
     bool hi = false;
 
-    auto text = std::string("hey");
-
+    // Syntactical sugar version.
+    /*
     for(vector<sharedPtr(Tile)>& col : tiles) {
         for(sharedPtr(Tile)& tile : col) {
             tile.reset(new Tile());
@@ -43,6 +43,15 @@ void LocationMap::initTiles() {
             tile->setDerp(hi);
         }
     }
+    */
+    for_each(tiles.begin(), tiles.end(), [&hi](vector<sharedPtr(Tile)>& col) {
+        for_each(col.begin(), col.end(), [&hi](sharedPtr(Tile)& tile) {
+            // Closures. Neat! hi is fed in as a reference.
+            tile.reset(new Tile());
+            hi = !hi;
+            tile->setDerp(hi);
+        } );
+    } );
 
 }
 

@@ -8,50 +8,30 @@
  */
 
 #include "Sprite.h"
-#include "CApp.h"
+#include "TextureManager.h"
 #include "SDL.h"
+#include "capp.h"
 
-TextureManager::TextureManager() {
-
+Sprite::Sprite(const std::string& filename, int x, int y, int w, int h) {
+    init(filename, {x, y, w, h});
+}
+Sprite::Sprite(const std::string& filename, SDL_Rect rect) {
+    init(filename, rect);
 }
 
-TextureManager * TextureManager::get() {
-    static TextureManager * manager;
-    if(!manager)
-        manager = new TextureManager();
-    
-    return manager;
+void Sprite::init(const std::string& filename, SDL_Rect rect) {
+    texture = TextureManager::get()->getTexture(filename);
+
+    this->rect = rect;
 }
 
-sharedPtr(SDL_Texture) TextureManager::getTexture(const std::string& filename) {
-    auto iter = textureMap.find(filename);
-    if(iter == textureMap.end())
-        return sharedPtr(SDL_Texture)();
-        
-    return iter->second;
+void Sprite::move(int x, int y) {
+    rect.x = x;
+    rect.y = y;
 }
 
-bool TextureManager::hasTexture(const std::string& filename) {
-    return getTexture(filename) != NULL;
-}
-
-void TextureManager::loadTexture(const std::string& filename) {
-    if(hasTexture(filename))
-        return;
-        
-    SDL_Surface * tempSurface = SDL_LoadBMP(filename.c_str());
-    if(!tempSurface)
-        throw ResourceException("TextureManager", "Couldn't load texture " + filename);
-        
-    // idk what the deal with this is
-    if (tempSurface->format->palette)
-        SDL_SetColorKey(tempSurface, 1, *(Uint8 *) tempSurface->pixels);
-    
-    sharedPtr(SDL_Texture) tex(
-        SDL_CreateTextureFromSurface(CApp::get().getRenderer(), tempSurface),
-        SDL_DestroyTexture);
-     
-    textureMap.insert(textureMapPair(filename, tex));
-    
-    SDL_FreeSurface(tempSurface);
+void Sprite::paint() {
+    SDL_Renderer * renderer = CApp::get()->getRenderer();
+    SDL_RenderFillRect(renderer, &rect);
+    SDL_RenderCopy(renderer, texture.get(), NULL, &rect);
 }

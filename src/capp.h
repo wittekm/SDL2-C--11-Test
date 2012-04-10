@@ -13,6 +13,7 @@
 #include <SDL.h>
 #include "includes.h"
 #include "LocationMap.h"
+#include "Sprite.h"
  
 class CApp {
 
@@ -22,10 +23,11 @@ private:
     SDL_Window * window;
     SDL_Renderer * renderer;
     
+    Sprite * s;
+
     // Disable copy
     CApp (const CApp&);
     CApp& operator= (const CApp&);
-    sharedPtr(SDL_Texture) texture;
 
 public:
     CApp();
@@ -40,7 +42,8 @@ public:
     void onLoop();
     void render();
     void clean();
-    static CApp& get();
+
+    static CApp * get();
 
 };
 

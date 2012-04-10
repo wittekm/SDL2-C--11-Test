@@ -8,6 +8,7 @@ CPP_SRCS += \
 ../src/LocationMap.cpp \
 ../src/Settings.cpp \
 ../src/Sprite.cpp \
+../src/TextureManager.cpp \
 ../src/Tile.cpp \
 ../src/capp.cpp \
 ../src/libwittek.cpp 
@@ -17,6 +18,7 @@ OBJS += \
 ./src/LocationMap.o \
 ./src/Settings.o \
 ./src/Sprite.o \
+./src/TextureManager.o \
 ./src/Tile.o \
 ./src/capp.o \
 ./src/libwittek.o 
@@ -26,6 +28,7 @@ CPP_DEPS += \
 ./src/LocationMap.d \
 ./src/Settings.d \
 ./src/Sprite.d \
+./src/TextureManager.d \
 ./src/Tile.d \
 ./src/capp.d \
 ./src/libwittek.d 
@@ -35,7 +38,7 @@ CPP_DEPS += \
 src/%.o: ../src/%.cpp
 	@echo 'Building file: $<'
 	@echo 'Invoking: GCC C++ Compiler'
-	/opt/local/bin/g++-mp-4.7 -D__GXX_EXPERIMENTAL_CXX0X__ -I/Users/max/Downloads/SDL-2.0.0-6302/include -O0 -g3 -Wall -c -fmessage-length=0 -std=c++11 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
+	/opt/local/bin/g++-mp-4.7 -D__GXX_EXPERIMENTAL_CXX0X__ -I/usr/local/include/SDL2 -O0 -g3 -Wall -c -fmessage-length=0 -std=c++11 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

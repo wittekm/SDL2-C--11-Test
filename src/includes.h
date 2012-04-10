@@ -35,4 +35,8 @@ sharedPtrTypedef(Tile);
 sharedPtrTypedef(SDL_Window);
 */
 
+
+typedef std::tr1::shared_ptr< SDL_Texture > TextureShared;
+typedef std::tr1::weak_ptr< SDL_Texture > TextureWeak;
+
 #endif

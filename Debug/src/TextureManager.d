@@ -1,4 +1,5 @@
-src/capp.d: ../src/capp.cpp ../src/capp.h /usr/local/include/SDL2/SDL.h \
+src/TextureManager.d: ../src/TextureManager.cpp ../src/TextureManager.h \
+ ../src/includes.h ../src/libwittek.h /usr/local/include/SDL2/SDL.h \
  /usr/local/include/SDL2/SDL_main.h /usr/local/include/SDL2/SDL_stdinc.h \
  /usr/local/include/SDL2/SDL_config.h \
  /usr/local/include/SDL2/SDL_platform.h \
@@ -25,11 +26,15 @@ src/capp.d: ../src/capp.cpp ../src/capp.h /usr/local/include/SDL2/SDL.h \
  /usr/local/include/SDL2/SDL_loadso.h /usr/local/include/SDL2/SDL_log.h \
  /usr/local/include/SDL2/SDL_power.h /usr/local/include/SDL2/SDL_render.h \
  /usr/local/include/SDL2/SDL_timer.h \
- /usr/local/include/SDL2/SDL_version.h ../src/includes.h \
- ../src/libwittek.h ../src/LocationMap.h ../src/Tile.h ../src/Sprite.h \
- /usr/local/include/SDL2/SDL_ttf.h /usr/local/include/SDL2/SDL.h
+ /usr/local/include/SDL2/SDL_version.h \
+ /usr/local/include/SDL2/SDL_image.h /usr/local/include/SDL2/SDL.h \
+ ../src/capp.h ../src/LocationMap.h ../src/Tile.h ../src/Sprite.h
 
-../src/capp.h:
+../src/TextureManager.h:
+
+../src/includes.h:
+
+../src/libwittek.h:
 
 /usr/local/include/SDL2/SDL.h:
 
@@ -107,16 +112,14 @@ src/capp.d: ../src/capp.cpp ../src/capp.h /usr/local/include/SDL2/SDL.h \
 
 /usr/local/include/SDL2/SDL_version.h:
 
-../src/includes.h:
+/usr/local/include/SDL2/SDL_image.h:
 
-../src/libwittek.h:
+/usr/local/include/SDL2/SDL.h:
+
+../src/capp.h:
 
 ../src/LocationMap.h:
 
 ../src/Tile.h:
 
 ../src/Sprite.h:
-
-/usr/local/include/SDL2/SDL_ttf.h:
-
-/usr/local/include/SDL2/SDL.h:
