@@ -24,7 +24,7 @@ public:
 private:
     void init(const std::string&, SDL_Rect);
     SDL_Rect rect;
-    sharedPtr(SDL_Texture) texture;
+    TextureShared texture;
 };
 
 #endif

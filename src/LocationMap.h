@@ -21,8 +21,8 @@ public:
     void initTiles();
     
     // Get a reference to a tile. Const correctness can s my d.
-    weakPtr(Tile) get(int row, int col);
-    weakPtr(Tile) getFromPixels(int x, int y);
+    TileWeak get(int row, int col);
+    TileWeak getFromPixels(int x, int y);
     
     
     int getRows();
@@ -34,10 +34,10 @@ public:
     
 private:
     int rows, cols, size;
-    std::vector< std::vector<sharedPtr(Tile)> > tiles;
+    std::vector< std::vector<TileShared>> tiles;
     
-    typedef std::vector<std::vector<sharedPtr(Tile)> >::iterator RowIter;
-    typedef std::vector<sharedPtr(Tile)>::iterator ColIter;
+    typedef std::vector<std::vector<TileShared>>::iterator RowIter;
+    typedef std::vector<TileShared>::iterator ColIter;
 };
 
 #endif

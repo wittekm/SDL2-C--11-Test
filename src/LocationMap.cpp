@@ -14,6 +14,7 @@
 #include <functional>
 
 using std::vector;
+using std::for_each;
 
 class LocationBoundsException : std::exception { };
 
@@ -24,7 +25,7 @@ LocationMap::LocationMap(int rows, int cols, int size):
     rows(rows), 
     cols(cols), 
     size(size),
-    tiles(rows, std::vector<sharedPtr(Tile)>(cols))
+    tiles(rows, std::vector<TileShared>(cols))
 {
     if(!(rows > 0 && cols > 0 && size > 0))
         throw std::invalid_argument("LocationMap initialization: rows, cols, size must be > 0.");
@@ -44,8 +45,8 @@ void LocationMap::initTiles() {
         }
     }
     */
-    for_each(tiles.begin(), tiles.end(), [&hi](vector<sharedPtr(Tile)>& col) {
-        for_each(col.begin(), col.end(), [&hi](sharedPtr(Tile)& tile) {
+    for_each(tiles.begin(), tiles.end(), [&hi](vector<TileShared>& col) {
+        for_each(col.begin(), col.end(), [&hi](TileShared& tile) {
             // Closures. Neat! hi is fed in as a reference.
             tile.reset(new Tile());
             hi = !hi;
@@ -55,14 +56,14 @@ void LocationMap::initTiles() {
 
 }
 
-weakPtr(Tile) LocationMap::get(int row, int col) {
+TileWeak LocationMap::get(int row, int col) {
     if(row < 0 || col < 0 || row >= rows || col >= cols)
         throw LocationBoundsException();
 
-    return weakPtr(Tile)(tiles.at(row).at(col));
+    return TileWeak(tiles.at(row).at(col));
 }
 
-weakPtr(Tile) LocationMap::getFromPixels(int x, int y) {
+TileWeak LocationMap::getFromPixels(int x, int y) {
     /*
     x /= Settings::get().devicePixelRatio;
     y /= Settings::get().devicePixelRatio;

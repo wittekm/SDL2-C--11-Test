@@ -59,7 +59,7 @@ void CApp::render() {
     
     for(int i = 0; i < map.getRows(); i++) {
         for(int j = 0; j < map.getCols(); j++) {
-            sharedPtr(Tile) t = map.get(i, j).lock();
+            TileShared t = map.get(i, j).lock();
             if(t->getDerp()) {
                 rect.x = i * map.getSize();
                 rect.y = j * map.getSize();
@@ -91,7 +91,7 @@ void CApp::onEvent(SDL_Event* event) {
     if(event->type == SDL_QUIT)
         running = false;
     if(event->type == SDL_MOUSEBUTTONDOWN) {
-        sharedPtr(Tile) t = map.getFromPixels(event->button.x, event->button.y).lock();
+        TileShared t = map.getFromPixels(event->button.x, event->button.y).lock();
         t->setDerp(!t->getDerp());
 
         s->move(event->button.x, event->button.y);

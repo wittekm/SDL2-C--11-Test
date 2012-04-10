@@ -10,6 +10,7 @@
 #include "libwittek.h"
 #include <iostream>
 #include <algorithm>
+using std::transform;
 using std::string;
 
 
