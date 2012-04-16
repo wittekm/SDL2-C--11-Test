@@ -12,9 +12,18 @@
 #include "SDL.h"
 #include "capp.h"
 
-Sprite::Sprite(const std::string& filename, SDL_Rect rect) {
+Sprite::Sprite(const std::string& filename)
+: rect(), texture()
+{
+    assert(filename.find("bmp") != string::npos );
     texture = TextureManager::get()->getTexture(filename);
-    this->rect = rect;
+    SDL_QueryTexture(texture.get(), 0, 0, &rect.w, &rect.h); // get width/height
+}
+
+Sprite::Sprite(const std::string& filename, SDL_Rect rect)
+: rect(rect), texture()
+{
+    texture = TextureManager::get()->getTexture(filename);
 }
 
 void Sprite::move(int x, int y) {

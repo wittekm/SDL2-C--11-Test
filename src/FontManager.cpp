@@ -28,10 +28,10 @@ TextureShared FontManager::createTexture
   (const string& message, const FontDefinition& definition, const SDL_Color& color) {
 
     FontShared font = getObject(definition);
-    SDL_Surface * tempSurface = TTF_RenderText_Solid(font.get(), message.c_str(), color);
-    return TextureShared(
-            SDL_CreateTextureFromSurface(renderer, tempSurface),
-            SDL_DestroyTexture);
+    SDL_Surface * tempSurface = TTF_RenderText_Blended(font.get(), message.c_str(), color);
+    TextureShared tex(SDL_CreateTextureFromSurface(renderer, tempSurface), SDL_DestroyTexture);
+    SDL_FreeSurface(tempSurface);
+    return tex;
 
 }
 

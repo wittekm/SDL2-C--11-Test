@@ -8,6 +8,8 @@
 #ifndef LABEL_H_
 #define LABEL_H_
 
+#include "SDL.h"
+
 #include "includes.h"
 
 class Label : public Paintable {
@@ -16,8 +18,8 @@ public:
     virtual void paint();
 
 private:
-    TextureShared tex;
-
+    TextureShared texture;
+    SDL_Rect rect;
 };
 
 #endif /* LABEL_H_ */

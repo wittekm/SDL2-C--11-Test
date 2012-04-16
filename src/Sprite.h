@@ -15,6 +15,8 @@
 
 class Sprite {
 public:
+    Sprite(const std::string& filename); // Don't use with BMP!
+
     Sprite(const std::string& filename, SDL_Rect rect);
 
     Sprite(const std::string& filename, int x, int y, int w, int h) :
@@ -24,8 +26,8 @@ public:
     void paint();
 
 private:
-    SDL_Rect rect;
     TextureShared texture;
+    SDL_Rect rect;
 };
 
 #endif
