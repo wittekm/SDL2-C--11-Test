@@ -7,27 +7,18 @@
  *
  */
  
-#ifndef _CAPP_H_
-#define _CAPP_H_
+#ifndef CAPP_H_
+#define CAPP_H_
  
 #include <SDL.h>
 #include "includes.h"
 #include "LocationMap.h"
 #include "Sprite.h"
- 
+
+class TextureManagerTwo;
+class FontManager;
+
 class CApp {
-
-private:
-    LocationMap map;
-    bool running;
-    SDL_Window * window;
-    SDL_Renderer * renderer;
-    
-    Sprite * s;
-
-    // Disable copy
-    CApp (const CApp&);
-    CApp& operator= (const CApp&);
 
 public:
     CApp();
@@ -45,6 +36,31 @@ public:
 
     static CApp * get();
 
+    TextureManagerTwo * getTextureManager() const {
+        assert(textureManager);
+        return textureManager;
+    }
+
+    FontManager * getFontManager() const {
+        assert(fontManager);
+        return fontManager;
+    }
+
+private:
+    LocationMap map;
+    bool running;
+    SDL_Window * window;
+    SDL_Renderer * renderer;
+
+    // Managers
+    TextureManagerTwo * textureManager;
+    FontManager * fontManager;
+
+    Sprite * s;
+
+    // Disable copy
+    CApp (const CApp&);
+    CApp& operator= (const CApp&);
 };
 
  

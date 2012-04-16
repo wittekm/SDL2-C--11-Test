@@ -4,8 +4,11 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
+../src/FontManager.cpp \
 ../src/GameMap.cpp \
+../src/Label.cpp \
 ../src/LocationMap.cpp \
+../src/Manager.cpp \
 ../src/Settings.cpp \
 ../src/Sprite.cpp \
 ../src/TextureManager.cpp \
@@ -14,8 +17,11 @@ CPP_SRCS += \
 ../src/libwittek.cpp 
 
 OBJS += \
+./src/FontManager.o \
 ./src/GameMap.o \
+./src/Label.o \
 ./src/LocationMap.o \
+./src/Manager.o \
 ./src/Settings.o \
 ./src/Sprite.o \
 ./src/TextureManager.o \
@@ -24,8 +30,11 @@ OBJS += \
 ./src/libwittek.o 
 
 CPP_DEPS += \
+./src/FontManager.d \
 ./src/GameMap.d \
+./src/Label.d \
 ./src/LocationMap.d \
+./src/Manager.d \
 ./src/Settings.d \
 ./src/Sprite.d \
 ./src/TextureManager.d \

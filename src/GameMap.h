@@ -7,8 +7,8 @@
  *
  */
 
-#ifndef _GAMEMAP_H_
-#define _GAMEMAP_H_
+#ifndef GAMEMAP_H_
+#define GAMEMAP_H_
 #include "includes.h"
 
 

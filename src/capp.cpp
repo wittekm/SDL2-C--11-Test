@@ -11,20 +11,51 @@
 #include "libwittek.h"
 #include "LocationMap.h"
 #include "Sprite.h"
+#include "TextureManager.h"
+#include "FontManager.h"
 
 #include "SDL_ttf.h"
  
 CApp::CApp() :
-map(8, 9, 24) {
-    running = true;
+map(8, 9, 24),
+running(true),
+window(0),
+renderer(0),
+textureManager(0),
+fontManager(0),
+s(0)
+{ }
+
+bool CApp::init() {
+
+    if(SDL_Init(SDL_INIT_EVERYTHING) < 0)
+        return false;
+
+
+    if(TTF_Init()==-1) {
+        printf("TTF_Init: %s\n", TTF_GetError());
+        return false;
+    }
+
+    window = SDL_CreateWindow("SDL_RenderClear",
+                SDL_WINDOWPOS_CENTERED,
+                SDL_WINDOWPOS_CENTERED,
+                256, 256,
+                SDL_WINDOW_SHOWN);
+
+    renderer = SDL_CreateRenderer(window, -1, 0);
+    textureManager = new TextureManagerTwo(renderer);
+    fontManager = new FontManager(renderer);
+
+    s = new Sprite("icon.bmp", {20, 20, 32, 32});
+
+    return true;
 }
  
 int CApp::exec() {
     if(init() == false) {
         return -1;
     }
-
-    s = new Sprite("icon.bmp", {20, 20, 32, 32});
  
     SDL_Event Event;
  
@@ -68,15 +99,6 @@ void CApp::render() {
         }
     }
     
-    /*
-    SDL_Rect drawRect;
-    drawRect.x = 20;
-    drawRect.y = 20;
-    drawRect.w = 16;
-    drawRect.h = 16;
-    SDL_RenderFillRect(renderer, &drawRect);
-    SDL_RenderCopy(renderer, texture.get(), NULL, &drawRect);
-    */
     s->paint();
 
     // Up until now everything was drawn behind the scenes.
@@ -98,37 +120,6 @@ void CApp::onEvent(SDL_Event* event) {
     }
 }
 
-bool CApp::init() {
-    
-    if(SDL_Init(SDL_INIT_EVERYTHING) < 0)
-        return false;
-
-
-    if(TTF_Init()==-1) {
-        printf("TTF_Init: %s\n", TTF_GetError());
-        exit(2);
-    }
-        
-    window = SDL_CreateWindow("SDL_RenderClear",
-                SDL_WINDOWPOS_CENTERED, 
-                SDL_WINDOWPOS_CENTERED,
-                256, 256,
-                SDL_WINDOW_SHOWN);
-                
-    renderer = SDL_CreateRenderer(window, -1, 0);
-    
-    /*
-    debug("-----");
-    debug(TextureManager::get()->hasTexture("icon.bmp"));
-    TextureManager::get()->loadTexture("icon.bmp");
-    texture = TextureManager::get()->getTexture("icon.bmp");
-    debug(TextureManager::get()->hasTexture("icon.bmp"));
-    debug("-----");
-    */
-
-    return true;
-}
-
 CApp * CApp::get() {
     static CApp * instance;
     if(!instance)
@@ -143,8 +134,6 @@ SDL_Renderer * CApp::getRenderer() {
  
 int main(int argc, char* argv[]) {
     CApp * app = CApp::get();
-    
-    debug("hey");
  
     return app->exec();
 }

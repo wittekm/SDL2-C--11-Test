@@ -12,16 +12,8 @@
 #include "SDL.h"
 #include "capp.h"
 
-Sprite::Sprite(const std::string& filename, int x, int y, int w, int h) {
-    init(filename, {x, y, w, h});
-}
 Sprite::Sprite(const std::string& filename, SDL_Rect rect) {
-    init(filename, rect);
-}
-
-void Sprite::init(const std::string& filename, SDL_Rect rect) {
     texture = TextureManager::get()->getTexture(filename);
-
     this->rect = rect;
 }
 

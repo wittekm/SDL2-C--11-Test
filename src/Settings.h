@@ -7,8 +7,8 @@
  *
  */
 
-#ifndef _SETTINGS_H_
-#define _SETTINGS_H_
+#ifndef SETTINGS_H_
+#define SETTINGS_H_
 
 class Settings {
     public:

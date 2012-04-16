@@ -5,9 +5,10 @@
  *      Author: max
  */
 
-#ifndef _TEXTUREMANAGER_H_
-#define _TEXTUREMANAGER_H_
+#ifndef TEXTUREMANAGER_H_
+#define TEXTUREMANAGER_H_
 
+#include "Manager.h"
 #include "includes.h"
 #include <map>
 
@@ -29,5 +30,16 @@ class TextureManager {
 
         typedef std::pair<std::string, TextureShared> TextureMapPair;
 };
+
+class TextureManagerTwo : public Manager<std::string, TextureShared> {
+    public:
+        TextureManagerTwo(SDL_Renderer* renderer);
+
+    private:
+        virtual TextureShared loadObject(const std::string&);
+
+        SDL_Renderer* renderer;
+};
+
 
 #endif /* TEXTUREMANAGER_H_ */

@@ -7,8 +7,8 @@
  *
  */
 
-#ifndef _TILE_H_
-#define _TILE_H_
+#ifndef TILE_H_
+#define TILE_H_
 
 class Tile {
     public:

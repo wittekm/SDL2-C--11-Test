@@ -7,8 +7,8 @@
  *
  */
 
-#ifndef _LOCATIONMAP_H_
-#define _LOCATIONMAP_H_
+#ifndef LOCATIONMAP_H_
+#define LOCATIONMAP_H_
 #include "includes.h"
 #include "Tile.h"
 #include <vector>

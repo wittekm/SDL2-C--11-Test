@@ -10,8 +10,8 @@
 #include "LocationMap.h"
 #include "Settings.h"
 #include <stdexcept>
-#include <algorithm>
 #include <functional>
+#include <algorithm>
 
 using std::vector;
 using std::for_each;
@@ -35,16 +35,6 @@ LocationMap::LocationMap(int rows, int cols, int size):
 void LocationMap::initTiles() {
     bool hi = false;
 
-    // Syntactical sugar version.
-    /*
-    for(vector<sharedPtr(Tile)>& col : tiles) {
-        for(sharedPtr(Tile)& tile : col) {
-            tile.reset(new Tile());
-            hi = !hi;
-            tile->setDerp(hi);
-        }
-    }
-    */
     for_each(tiles.begin(), tiles.end(), [&hi](vector<TileShared>& col) {
         for_each(col.begin(), col.end(), [&hi](TileShared& tile) {
             // Closures. Neat! hi is fed in as a reference.
