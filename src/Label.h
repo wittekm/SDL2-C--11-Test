@@ -16,7 +16,7 @@ public:
     virtual void paint();
 
 private:
-    TextureShared * tex;
+    TextureShared tex;
 
 };
 

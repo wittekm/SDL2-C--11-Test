@@ -48,6 +48,7 @@ bool CApp::init() {
     fontManager = new FontManager(renderer);
 
     s = new Sprite("icon.bmp", {20, 20, 32, 32});
+    label = new Label("test", "Arial.ttf");
 
     return true;
 }
@@ -100,6 +101,7 @@ void CApp::render() {
     }
     
     s->paint();
+    label->paint();
 
     // Up until now everything was drawn behind the scenes.
     // This will show the new, red contents of the window.
@@ -135,5 +137,10 @@ SDL_Renderer * CApp::getRenderer() {
 int main(int argc, char* argv[]) {
     CApp * app = CApp::get();
  
-    return app->exec();
+    try {
+        return app->exec();
+    } catch(ResourceException& e) {
+        debug(e.what());
+    }
+    return -1;
 }

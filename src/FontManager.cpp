@@ -17,17 +17,21 @@ FontShared FontManager::loadObject(const FontDefinition& definition) {
     // Create shared pointer that cleans up with TTF_CloseFont
     FontShared font(TTF_OpenFont(definition.fontFamily.c_str(), definition.size), TTF_CloseFont);
     if(!font)
-        throw ResourceException("FontManager", "Could not create font");
+        throw ResourceException("FontManager", TTF_GetError());
 
-    //addObject(definition, font);
+    addObject(definition, font);
 
     return font;
 }
 
-TextureShared createTexture(const string& message, const FontDefinition& definition) {
-    SDL_Surface * tempSurface = TTF_RenderText_Solid( font, "quick brown fox", textColor );
+TextureShared FontManager::createTexture
+  (const string& message, const FontDefinition& definition, const SDL_Color& color) {
+
+    FontShared font = getObject(definition);
+    SDL_Surface * tempSurface = TTF_RenderText_Solid(font.get(), message.c_str(), color);
     return TextureShared(
             SDL_CreateTextureFromSurface(renderer, tempSurface),
             SDL_DestroyTexture);
+
 }
 

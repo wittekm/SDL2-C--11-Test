@@ -25,7 +25,7 @@ void debug(const int & b) {
 }
 
 ResourceException::ResourceException(std::string source, std::string explanation) {
-    this->source = source;
+    this->source = source + ": " + explanation;
 }
 
 const char* ResourceException::what() const throw() {

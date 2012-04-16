@@ -14,6 +14,7 @@
 #include "includes.h"
 #include "LocationMap.h"
 #include "Sprite.h"
+#include "Label.h"
 
 class TextureManagerTwo;
 class FontManager;
@@ -57,6 +58,7 @@ private:
     FontManager * fontManager;
 
     Sprite * s;
+    Label * label;
 
     // Disable copy
     CApp (const CApp&);
