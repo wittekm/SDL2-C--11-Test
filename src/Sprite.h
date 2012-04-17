@@ -10,24 +10,13 @@
 #ifndef SPRITE_H_
 #define SPRITE_H_
 
-#include "SDL.h"
-#include "includes.h"
+#include "GameObject.h"
 
-class Sprite {
+class Sprite : public GameObject {
 public:
     Sprite(const std::string& filename); // Don't use with BMP!
 
     Sprite(const std::string& filename, SDL_Rect rect);
-
-    Sprite(const std::string& filename, int x, int y, int w, int h) :
-        Sprite(filename, {x, y, w, h}) { }
-
-    void move(int x, int y);
-    void paint();
-
-private:
-    TextureShared texture;
-    SDL_Rect rect;
 };
 
 #endif

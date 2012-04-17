@@ -27,10 +27,8 @@ s(0)
 { }
 
 bool CApp::init() {
-
     if(SDL_Init(SDL_INIT_EVERYTHING) < 0)
         return false;
-
 
     if(TTF_Init()==-1) {
         printf("TTF_Init: %s\n", TTF_GetError());
@@ -100,7 +98,7 @@ void CApp::render() {
         }
     }
     
-    s->paint();
+    //s->paint();
     label->paint();
 
     // Up until now everything was drawn behind the scenes.
@@ -118,7 +116,8 @@ void CApp::onEvent(SDL_Event* event) {
         TileShared t = map.getFromPixels(event->button.x, event->button.y).lock();
         t->setDerp(!t->getDerp());
 
-        s->move(event->button.x, event->button.y);
+        s->move({event->button.x, event->button.y});
+        label->move({event->button.x, event->button.y});
     }
 }
 

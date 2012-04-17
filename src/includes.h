@@ -42,10 +42,4 @@ typedef std::weak_ptr< Tile > TileWeak;
 typedef std::shared_ptr< _TTF_Font > FontShared;
 typedef std::weak_ptr< _TTF_Font > FontWeak;
 
-class Paintable {
-public:
-    virtual ~Paintable() {}
-    virtual void paint() = 0;
-};
-
 #endif

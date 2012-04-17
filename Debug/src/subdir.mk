@@ -6,6 +6,7 @@
 CPP_SRCS += \
 ../src/FontManager.cpp \
 ../src/GameMap.cpp \
+../src/GameObject.cpp \
 ../src/Label.cpp \
 ../src/LocationMap.cpp \
 ../src/Manager.cpp \
@@ -19,6 +20,7 @@ CPP_SRCS += \
 OBJS += \
 ./src/FontManager.o \
 ./src/GameMap.o \
+./src/GameObject.o \
 ./src/Label.o \
 ./src/LocationMap.o \
 ./src/Manager.o \
@@ -32,6 +34,7 @@ OBJS += \
 CPP_DEPS += \
 ./src/FontManager.d \
 ./src/GameMap.d \
+./src/GameObject.d \
 ./src/Label.d \
 ./src/LocationMap.d \
 ./src/Manager.d \

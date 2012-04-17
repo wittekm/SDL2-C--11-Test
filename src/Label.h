@@ -9,17 +9,12 @@
 #define LABEL_H_
 
 #include "SDL.h"
-
+#include "GameObject.h"
 #include "includes.h"
 
-class Label : public Paintable {
+class Label : public GameObject {
 public:
     Label(const std::string& text, const std::string& font);
-    virtual void paint();
-
-private:
-    TextureShared texture;
-    SDL_Rect rect;
 };
 
 #endif /* LABEL_H_ */

@@ -13,26 +13,17 @@
 #include "capp.h"
 
 Sprite::Sprite(const std::string& filename)
-: rect(), texture()
+: GameObject()
 {
-    assert(filename.find("bmp") != string::npos );
-    texture = TextureManager::get()->getTexture(filename);
-    SDL_QueryTexture(texture.get(), 0, 0, &rect.w, &rect.h); // get width/height
+    // Disallow BMPs with this constructor
+    assert(!containsFromEnd(filename, "bmp"));
+
+    texture = CApp::get()->getTextureManager()->getObject(filename);
+    SDL_QueryTexture(texture.get(), 0, 0, &nextRect.w, &nextRect.h); // get width/height
 }
 
 Sprite::Sprite(const std::string& filename, SDL_Rect rect)
-: rect(rect), texture()
+: GameObject(rect)
 {
-    texture = TextureManager::get()->getTexture(filename);
-}
-
-void Sprite::move(int x, int y) {
-    rect.x = x;
-    rect.y = y;
-}
-
-void Sprite::paint() {
-    SDL_Renderer * renderer = CApp::get()->getRenderer();
-    SDL_RenderFillRect(renderer, &rect);
-    SDL_RenderCopy(renderer, texture.get(), NULL, &rect);
+    texture = CApp::get()->getTextureManager()->getObject(filename);
 }
