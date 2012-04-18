@@ -1,3 +1,4 @@
 *.o
 *.d
 *.mk
+Debug/SDL-CPP11-Test

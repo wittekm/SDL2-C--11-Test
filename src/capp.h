@@ -10,13 +10,14 @@
 #ifndef CAPP_H_
 #define CAPP_H_
  
-#include <SDL.h>
+#include "SDL.h"
 #include "includes.h"
 #include "LocationMap.h"
-#include "Sprite.h"
-#include "Label.h"
 
-class TextureManagerTwo;
+#include <set>
+#include <functional>
+
+class TextureManager;
 class FontManager;
 
 class CApp {
@@ -37,7 +38,7 @@ public:
 
     static CApp * get();
 
-    TextureManagerTwo * getTextureManager() const {
+    TextureManager * getTextureManager() const {
         assert(textureManager);
         return textureManager;
     }
@@ -54,11 +55,11 @@ private:
     SDL_Renderer * renderer;
 
     // Managers
-    TextureManagerTwo * textureManager;
+    TextureManager * textureManager;
     FontManager * fontManager;
 
-    Sprite * s;
-    Label * label;
+    // Sort this set by Z-index
+    std::set<GameObjectShared, bool(*)(GameObjectShared, GameObjectShared)> gameObjects;
 
     // Disable copy
     CApp (const CApp&);

@@ -25,6 +25,7 @@
 class CApp;
 class Tile;
 class Label;
+class GameObject;
 
 class SDL_Window;
 class SDL_Renderer;
@@ -41,5 +42,10 @@ typedef std::weak_ptr< Tile > TileWeak;
 // Gotta use _TTF_Font because TTF_Font is actually a typedef!
 typedef std::shared_ptr< _TTF_Font > FontShared;
 typedef std::weak_ptr< _TTF_Font > FontWeak;
+
+// Gotta use _TTF_Font because TTF_Font is actually a typedef!
+typedef std::shared_ptr< GameObject > GameObjectShared;
+typedef std::weak_ptr< GameObject > GameObjectWeak;
+
 
 #endif

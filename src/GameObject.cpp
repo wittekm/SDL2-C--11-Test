@@ -12,12 +12,12 @@ GameObject::GameObject(SDL_Rect rect) :
 texture(),
 rect(rect),
 nextRect(),
-dirty(true)
+dirty(true),
+z(0)
 { }
 
 GameObject::~GameObject() {
     preDelete();
-    // TODO Auto-generated destructor stub
 }
 
 void GameObject::paint() {

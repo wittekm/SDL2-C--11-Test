@@ -10,9 +10,12 @@
 #include "capp.h"
 #include "libwittek.h"
 #include "LocationMap.h"
-#include "Sprite.h"
 #include "TextureManager.h"
 #include "FontManager.h"
+
+#include "GameObject.h"
+#include "Sprite.h"
+#include "Label.h"
 
 #include "SDL_ttf.h"
  
@@ -23,8 +26,11 @@ window(0),
 renderer(0),
 textureManager(0),
 fontManager(0),
-s(0)
+gameObjects(
+  [](GameObjectShared a, GameObjectShared b) {return a->getZ() < b->getZ();}
+)
 { }
+
 
 bool CApp::init() {
     if(SDL_Init(SDL_INIT_EVERYTHING) < 0)
@@ -42,11 +48,13 @@ bool CApp::init() {
                 SDL_WINDOW_SHOWN);
 
     renderer = SDL_CreateRenderer(window, -1, 0);
-    textureManager = new TextureManagerTwo(renderer);
+
+    // Can't do these in initlist; need renderer
+    textureManager = new TextureManager(renderer);
     fontManager = new FontManager(renderer);
 
-    s = new Sprite("icon.bmp", {20, 20, 32, 32});
-    label = new Label("test", "Arial.ttf");
+    gameObjects.insert(GameObjectShared(new Sprite("icon.bmp", {20, 20, 32, 32})));
+    gameObjects.insert(GameObjectShared(new Label("test", "Arial.ttf")));
 
     return true;
 }
@@ -98,9 +106,10 @@ void CApp::render() {
         }
     }
     
-    //s->paint();
-    label->paint();
-
+    for(GameObjectShared g : gameObjects) {
+        if(Label * l = dynamic_cast<Label*>(g.get()))
+            l->paint();
+    }
     // Up until now everything was drawn behind the scenes.
     // This will show the new, red contents of the window.
     SDL_RenderPresent(renderer);
@@ -116,8 +125,10 @@ void CApp::onEvent(SDL_Event* event) {
         TileShared t = map.getFromPixels(event->button.x, event->button.y).lock();
         t->setDerp(!t->getDerp());
 
-        s->move({event->button.x, event->button.y});
-        label->move({event->button.x, event->button.y});
+        for(GameObjectShared g : gameObjects) {
+            if(Label * l = dynamic_cast<Label*>(g.get()))
+                l->move({event->button.x, event->button.y});
+        }
     }
 }
 
@@ -143,3 +154,8 @@ int main(int argc, char* argv[]) {
     }
     return -1;
 }
+/*
+bool CApp::GameObjectZCompare::operator()(GameObjectShared a, GameObjectShared b) {
+    return a->getZ() < b->getZ();
+};
+*/

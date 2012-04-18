@@ -9,7 +9,6 @@
 
 #include "Sprite.h"
 #include "TextureManager.h"
-#include "SDL.h"
 #include "capp.h"
 
 Sprite::Sprite(const std::string& filename)

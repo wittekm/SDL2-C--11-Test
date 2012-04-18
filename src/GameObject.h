@@ -28,14 +28,14 @@ public:
     //virtual void preDelete(std::function<void(void)> fn) { fn(); }
     virtual void preDelete() { }
 
+    int getZ() { return z; }
+
 protected:
     TextureShared texture;
     SDL_Rect rect;
     SDL_Rect nextRect;
     bool dirty;
+    int z;
 };
-
-
-
 
 #endif /* GAMEOBJECT_H_ */
