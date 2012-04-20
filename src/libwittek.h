@@ -11,19 +11,16 @@
 #define LIBWITTEK_H_
 
 #include <string>
-//#include <functional>
 #include <cassert>
+#include <stdexcept>
 
 #define DEBUG 1
 void debug(const std::string & s);
 void debug(const int & b);
 
-class ResourceException {
-    public:
-        ResourceException(std::string source, std::string explanation = "");
-        const char* what() const throw();
-    private:
-        std::string source;
+class ResourceException : public std::runtime_error {
+public:
+    ResourceException(const std::string& source, const std::string& explanation = "");
 };
 
 // Inheritable Singleton
@@ -37,7 +34,7 @@ class Singleton
         static void set(T*);
     protected:
         Singleton() { };
-        ~Singleton();
+        virtual ~Singleton() { };
     private:
         Singleton(Singleton const&);
         Singleton& operator=(Singleton const&);
@@ -58,7 +55,8 @@ void Singleton<T>::set(T* t)
         instance = t;
 }
 
-template <class T> T* Singleton<T>::instance = 0;
+template <class T>
+T* Singleton<T>::instance = 0;
 
 
 // An aborted singleton class that can take a constructor (kinda) as a parameter

@@ -24,13 +24,8 @@ void debug(const int & b) {
         std::cout << b << std::endl;
 }
 
-ResourceException::ResourceException(std::string source, std::string explanation) {
-    this->source = source + ": " + explanation;
-}
-
-const char* ResourceException::what() const throw() {
-    return source.c_str();
-}
+ResourceException::ResourceException(const string& source, const string& explanation) :
+std::runtime_error(source + ": " + explanation) { }
 
 string toLower(string s) {
     transform(s.begin(), s.end(), s.begin(), tolower);

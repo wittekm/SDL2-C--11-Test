@@ -10,6 +10,7 @@ CPP_SRCS += \
 ../src/Label.cpp \
 ../src/LocationMap.cpp \
 ../src/Manager.cpp \
+../src/SdlVideo.cpp \
 ../src/Settings.cpp \
 ../src/Sprite.cpp \
 ../src/TextureManager.cpp \
@@ -24,6 +25,7 @@ OBJS += \
 ./src/Label.o \
 ./src/LocationMap.o \
 ./src/Manager.o \
+./src/SdlVideo.o \
 ./src/Settings.o \
 ./src/Sprite.o \
 ./src/TextureManager.o \
@@ -38,6 +40,7 @@ CPP_DEPS += \
 ./src/Label.d \
 ./src/LocationMap.d \
 ./src/Manager.d \
+./src/SdlVideo.d \
 ./src/Settings.d \
 ./src/Sprite.d \
 ./src/TextureManager.d \

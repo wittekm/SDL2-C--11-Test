@@ -17,6 +17,7 @@
 #include <set>
 #include <functional>
 
+class SdlVideo;
 class TextureManager;
 class FontManager;
 
@@ -24,9 +25,7 @@ class CApp {
 
 public:
     CApp();
-    
     SDL_Renderer * getRenderer();
-
     int exec();
 
 public:
@@ -49,15 +48,15 @@ public:
     }
 
 private:
-    LocationMap map;
-    bool running;
-    SDL_Window * window;
-    SDL_Renderer * renderer;
+    SdlVideo * video;
 
     // Managers
     TextureManager * textureManager;
     FontManager * fontManager;
 
+    bool running;
+
+    LocationMap map;
     // Sort this set by Z-index
     std::set<GameObjectShared, bool(*)(GameObjectShared, GameObjectShared)> gameObjects;
 

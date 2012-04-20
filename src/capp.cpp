@@ -9,7 +9,10 @@
 
 #include "capp.h"
 #include "libwittek.h"
+#include "SdlVideo.h"
+
 #include "LocationMap.h"
+
 #include "TextureManager.h"
 #include "FontManager.h"
 
@@ -17,41 +20,22 @@
 #include "Sprite.h"
 #include "Label.h"
 
-#include "SDL_ttf.h"
  
 CApp::CApp() :
-map(8, 9, 24),
+video(SdlVideo::get()),
+textureManager(new TextureManager(video->getRenderer())),
+fontManager(new FontManager(video->getRenderer())),
 running(true),
-window(0),
-renderer(0),
-textureManager(0),
-fontManager(0),
+map(8, 9, 24),
+// sorting algorithm: by z-index
 gameObjects(
   [](GameObjectShared a, GameObjectShared b) {return a->getZ() < b->getZ();}
 )
 { }
 
-
+// TODO: strip out the window and renderer into something else!
 bool CApp::init() {
-    if(SDL_Init(SDL_INIT_EVERYTHING) < 0)
-        return false;
-
-    if(TTF_Init()==-1) {
-        printf("TTF_Init: %s\n", TTF_GetError());
-        return false;
-    }
-
-    window = SDL_CreateWindow("SDL_RenderClear",
-                SDL_WINDOWPOS_CENTERED,
-                SDL_WINDOWPOS_CENTERED,
-                256, 256,
-                SDL_WINDOW_SHOWN);
-
-    renderer = SDL_CreateRenderer(window, -1, 0);
-
     // Can't do these in initlist; need renderer
-    textureManager = new TextureManager(renderer);
-    fontManager = new FontManager(renderer);
 
     gameObjects.insert(GameObjectShared(new Sprite("icon.bmp", {20, 20, 32, 32})));
     gameObjects.insert(GameObjectShared(new Label("test", "Arial.ttf")));
@@ -87,10 +71,10 @@ void CApp::clean() {
 
 
 void CApp::render() {
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-    SDL_RenderClear(renderer);
+    video->setDrawColor(0, 0, 0, 255);
+    video->clear();
     
-    SDL_SetRenderDrawColor(renderer, 0, 255, 255, 255);
+    video->setDrawColor(0, 255, 255, 255);
     SDL_Rect rect;
     rect.w = map.getSize();
     rect.h = map.getSize();
@@ -101,7 +85,7 @@ void CApp::render() {
             if(t->getDerp()) {
                 rect.x = i * map.getSize();
                 rect.y = j * map.getSize();
-                SDL_RenderDrawRect(renderer, &rect);
+                video->drawRect(rect);
             }
         }
     }
@@ -112,7 +96,7 @@ void CApp::render() {
     }
     // Up until now everything was drawn behind the scenes.
     // This will show the new, red contents of the window.
-    SDL_RenderPresent(renderer);
+    video->present();
 }
 
 void CApp::onLoop() {
@@ -137,10 +121,6 @@ CApp * CApp::get() {
     if(!instance)
         instance = new CApp;
     return instance;
-}
-
-SDL_Renderer * CApp::getRenderer() {
-    return renderer;
 }
 
  

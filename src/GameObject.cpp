@@ -6,7 +6,7 @@
  */
 
 #include "GameObject.h"
-#include "capp.h"
+#include "SdlVideo.h"
 
 GameObject::GameObject(SDL_Rect rect) :
 texture(),
@@ -23,8 +23,8 @@ GameObject::~GameObject() {
 void GameObject::paint() {
     //if(!dirty) return;
     rect = nextRect;
-    static SDL_Renderer * renderer = CApp::get()->getRenderer();
-    SDL_RenderCopy(renderer, texture.get(), 0, &rect);
+    static SdlVideo * video = SdlVideo::get();
+    video->copy(texture.get(), rect);
     dirty = false;
 }
 
