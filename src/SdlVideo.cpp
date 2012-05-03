@@ -49,7 +49,8 @@ void SdlVideo::drawRect(const SDL_Rect& rect) {
 }
 
 SdlVideo::~SdlVideo() {
-
+    if(renderer) SDL_DestroyRenderer(renderer);
+    if(window)   SDL_DestroyWindow(window);
 }
 
 void SdlVideo::clear() {

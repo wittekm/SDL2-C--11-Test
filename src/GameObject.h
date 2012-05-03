@@ -12,7 +12,8 @@
 #include "includes.h"
 #include <functional>
 
-class GameObject {
+
+class GameObject : public std::enable_shared_from_this<GameObject> {
 public:
     GameObject(SDL_Rect rect);
     GameObject() : GameObject(SDL_Rect()) { }
@@ -23,6 +24,9 @@ public:
 
     void move(const SDL_Point&);
     void moveDelta(const SDL_Point&);
+
+    void setParent(const GameObjectShared& parent);
+    GameObjectShared getParent();
 
     // Should I do this? Come back later and figure it out.
     //virtual void preDelete(std::function<void(void)> fn) { fn(); }
@@ -36,6 +40,7 @@ protected:
     SDL_Rect nextRect;
     bool dirty;
     int z;
+    GameObjectWeak parent;
 };
 
 #endif /* GAMEOBJECT_H_ */

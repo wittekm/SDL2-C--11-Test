@@ -13,7 +13,8 @@ texture(),
 rect(rect),
 nextRect(),
 dirty(true),
-z(0)
+z(0),
+parent()
 { }
 
 GameObject::~GameObject() {
@@ -38,4 +39,12 @@ void GameObject::moveDelta(const SDL_Point& p) {
     nextRect.x += p.x;
     nextRect.y += p.y;
     dirty = true;
+}
+
+void GameObject::setParent(const GameObjectShared& gameObject) {
+    parent = gameObject;
+}
+
+GameObjectShared GameObject::getParent() {
+    return parent.lock();
 }

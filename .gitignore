@@ -2,3 +2,9 @@
 *.d
 *.mk
 Debug/SDL-CPP11-Test
+
+src/.CompositeGameObject.cpp.swp
+
+src/.GameObject.cpp.swp
+
+src/test2

@@ -4,6 +4,7 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
+../src/CompositeGameObject.cpp \
 ../src/FontManager.cpp \
 ../src/GameMap.cpp \
 ../src/GameObject.cpp \
@@ -19,6 +20,7 @@ CPP_SRCS += \
 ../src/libwittek.cpp 
 
 OBJS += \
+./src/CompositeGameObject.o \
 ./src/FontManager.o \
 ./src/GameMap.o \
 ./src/GameObject.o \
@@ -34,6 +36,7 @@ OBJS += \
 ./src/libwittek.o 
 
 CPP_DEPS += \
+./src/CompositeGameObject.d \
 ./src/FontManager.d \
 ./src/GameMap.d \
 ./src/GameObject.d \

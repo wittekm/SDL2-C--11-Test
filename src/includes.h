@@ -7,6 +7,7 @@
 #include <string>
 #include <memory>
 
+
 // forward declarations
 class CApp;
 class Tile;
@@ -34,5 +35,6 @@ typedef std::weak_ptr< _TTF_Font > FontWeak;
 typedef std::shared_ptr< GameObject > GameObjectShared;
 typedef std::weak_ptr< GameObject > GameObjectWeak;
 
+typedef bool (*GameObjectSharedComparator) (const GameObjectShared&, const GameObjectShared&);
 
 #endif
