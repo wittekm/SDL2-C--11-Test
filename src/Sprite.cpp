@@ -15,7 +15,7 @@ Sprite::Sprite(const std::string& filename)
 : GameObject()
 {
     // Disallow BMPs with this constructor
-    assert(!containsFromEnd(filename, "bmp"));
+    assert(!contains(filename, "bmp"));
 
     texture = CApp::get()->getTextureManager()->getObject(filename);
     SDL_QueryTexture(texture.get(), 0, 0, &nextRect.w, &nextRect.h); // get width/height

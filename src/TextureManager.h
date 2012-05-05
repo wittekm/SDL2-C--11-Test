@@ -10,7 +10,6 @@
 
 #include "Manager.h"
 #include "includes.h"
-#include <map>
 
 class TextureManager : public Manager<std::string, TextureShared> {
     public:

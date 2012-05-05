@@ -37,5 +37,6 @@ bool contains(const string& s, const string& query) {
 }
 
 bool containsFromEnd(const string& s, const string& query) {
+    assert(false); // don't use this it doesn't work for some crazy reason
     return s.find_last_of(query) != string::npos;
 }

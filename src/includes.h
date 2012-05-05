@@ -31,9 +31,11 @@ typedef std::weak_ptr< Tile > TileWeak;
 typedef std::shared_ptr< _TTF_Font > FontShared;
 typedef std::weak_ptr< _TTF_Font > FontWeak;
 
-// Gotta use _TTF_Font because TTF_Font is actually a typedef!
+// GameObjects
 typedef std::shared_ptr< GameObject > GameObjectShared;
 typedef std::weak_ptr< GameObject > GameObjectWeak;
+typedef std::shared_ptr< Label > LabelShared;
+typedef std::weak_ptr< Label > LabelWeak;
 
 typedef bool (*GameObjectSharedComparator) (const GameObjectShared&, const GameObjectShared&);
 

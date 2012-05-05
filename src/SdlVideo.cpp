@@ -27,7 +27,7 @@ renderer(0)
         throw SdlVideoException(TTF_GetError());
     }
 
-    window = SDL_CreateWindow("SDL_RenderClear",
+    window = SDL_CreateWindow("sdl is dumb",
                 SDL_WINDOWPOS_CENTERED,
                 SDL_WINDOWPOS_CENTERED,
                 256, 256,

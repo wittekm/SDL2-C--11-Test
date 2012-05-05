@@ -21,7 +21,7 @@ TextureShared TextureManager::loadObject(const std::string& filename) {
         throw ResourceException("TextureManager", "Invalid filename, should be _.bmp or _.png");
 
     string lowerFilename(toLower(filename.substr(filename.size()-4)));
-    if(!(lowerFilename == ".bmp" || lowerFilename == ".png"))
+    if(!(lowerFilename == ".bmp" || lowerFilename == ".png" || lowerFilename == ".gif"))
         throw ResourceException("TextureManager", "Invalid filename, should be _.bmp or _.png");
 
     SDL_Surface * tempSurface = IMG_Load(filename.c_str());
