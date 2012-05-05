@@ -10,6 +10,8 @@
 #ifndef TILE_H_
 #define TILE_H_
 
+#include "includes.h"
+
 class Tile {
     public:
         Tile();
@@ -17,10 +19,13 @@ class Tile {
         int getCol() const;
         void setDerp(const int& d);
         int getDerp();
+        SpriteShared getSprite();
+        void setSprite(const SpriteShared&);
         
     private:
         int row, col;
         int derp;
+        SpriteShared sprite;
 };
 
 #endif

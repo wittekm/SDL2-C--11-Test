@@ -13,14 +13,20 @@
 #include <functional>
 
 class CompositeGameObject : public GameObject {
+private:
+     typedef std::function<bool(GameObjectShared, GameObjectShared)> GameObjectSharedComparator;
+     typedef std::set<GameObjectShared, GameObjectSharedComparator> GameObjectsSet;
 public:
     CompositeGameObject();
     virtual ~CompositeGameObject();
     void addChild(const GameObjectShared& gameObject);
     virtual void paint();
+    
+    GameObjectsSet::iterator begin() { return gameObjects.begin(); }
+    GameObjectsSet::iterator end() { return gameObjects.end(); }
+
 private:
-    typedef std::function<bool(GameObjectShared, GameObjectShared)> GameObjectSharedComparator;
-    std::set<GameObjectShared, GameObjectSharedComparator> gameObjects;
+    GameObjectsSet gameObjects;
 };
 
 #endif /* COMPOSITEGAMEOBJECT_H_ */

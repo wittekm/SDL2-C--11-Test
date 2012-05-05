@@ -7,7 +7,8 @@
 
 #include "Label.h"
 #include "SDL.h"
-#include "SDL_ttf.h"
+//#include "SDL_ttf.h"
+#include "capp.h"
 #include "FontManager.h"
 
 using std::string;

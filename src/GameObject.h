@@ -33,6 +33,9 @@ public:
     virtual void preDelete() { }
 
     int getZ() { return z; }
+    SDL_Rect getRect() { return rect; }
+
+    void setVisible(bool);
 
 protected:
     TextureShared texture;
@@ -40,6 +43,7 @@ protected:
     SDL_Rect nextRect;
     bool dirty;
     int z;
+    bool visible;
     GameObjectWeak parent;
 };
 

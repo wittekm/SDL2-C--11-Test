@@ -12,6 +12,7 @@
 #include <stdexcept>
 #include <functional>
 #include <algorithm>
+#include "CompositeGameObject"
 
 using std::vector;
 using std::for_each;
@@ -25,11 +26,12 @@ LocationMap::LocationMap(int rows, int cols, int size):
     rows(rows), 
     cols(cols), 
     size(size),
-    tiles(rows, std::vector<TileShared>(cols))
+    tiles(rows, std::vector<TileShared>(cols)) 
 {
     if(!(rows > 0 && cols > 0 && size > 0))
         throw std::invalid_argument("LocationMap initialization: rows, cols, size must be > 0.");
     initTiles();
+    debug("derp");
 }
 
 void LocationMap::initTiles() {

@@ -11,6 +11,8 @@
 #include "includes.h"
 #include "Manager.h"
 
+#include "SDL.h" // for SDL_Color
+
 struct FontDefinition {
     std::string fontFamily;
     int size;

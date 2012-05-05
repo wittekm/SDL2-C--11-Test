@@ -14,6 +14,7 @@ rect(rect),
 nextRect(),
 dirty(true),
 z(0),
+visible(true),
 parent()
 { }
 
@@ -22,6 +23,7 @@ GameObject::~GameObject() {
 }
 
 void GameObject::paint() {
+    if(!visible) return;
     //if(!dirty) return;
     rect = nextRect;
     static SdlVideo * video = SdlVideo::get();
@@ -47,4 +49,8 @@ void GameObject::setParent(const GameObjectShared& gameObject) {
 
 GameObjectShared GameObject::getParent() {
     return parent.lock();
+}
+
+void GameObject::setVisible(bool b) {
+    visible = b;
 }

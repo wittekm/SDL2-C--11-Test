@@ -13,6 +13,8 @@ class CApp;
 class Tile;
 class Label;
 class GameObject;
+class CompositeGameObject;
+class Sprite;
 
 class SDL_Window;
 class SDL_Renderer;
@@ -34,9 +36,17 @@ typedef std::weak_ptr< _TTF_Font > FontWeak;
 // GameObjects
 typedef std::shared_ptr< GameObject > GameObjectShared;
 typedef std::weak_ptr< GameObject > GameObjectWeak;
+
 typedef std::shared_ptr< Label > LabelShared;
 typedef std::weak_ptr< Label > LabelWeak;
 
-typedef bool (*GameObjectSharedComparator) (const GameObjectShared&, const GameObjectShared&);
+typedef std::shared_ptr< Sprite > SpriteShared;
+typedef std::weak_ptr< Sprite > SpriteWeak;
+
+typedef std::shared_ptr< CompositeGameObject > 
+  CompositeGameObjectShared;
+typedef std::weak_ptr< CompositeGameObject > 
+  CompositeGameObjectWeak;
+
 
 #endif

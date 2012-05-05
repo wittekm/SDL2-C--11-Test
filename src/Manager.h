@@ -21,10 +21,7 @@ class Manager {
         //virtual ~Manager();
 
     public:
-        // Singleton
-        static Manager * get();
 
-        // these could be statics if I wanted to, but I prefer get()->
         SharedPtr getObject(const Key&);
         bool hasObject(const Key&);
         void addObject(const Key&, const SharedPtr&);
@@ -40,6 +37,7 @@ class Manager {
         typedef std::pair<Key, SharedPtr> MapPair;
 };
 
+// Include cpp file here because it's templated
 #include "Manager.cpp"
 
 #endif /* MANAGER_H_ */

@@ -19,6 +19,7 @@
 #include "GameObject.h"
 #include "Sprite.h"
 #include "Label.h"
+#include "CompositeGameObject.h"
 
 using std::dynamic_pointer_cast;
  
@@ -29,11 +30,7 @@ fontManager(new FontManager(video->getRenderer())),
 running(true),
 map(8, 9, 24),
 // sorting algorithm: by z-index, then by ptr value (who cares)
-gameObjects(
-  [](GameObjectShared a, GameObjectShared b) {
-    return a->getZ() < b->getZ() ? true : a.get() < b.get();
-  }
-)
+rootObject(new CompositeGameObject())
 { }
 
 // TODO: strip out the window and renderer into something else!
@@ -41,9 +38,22 @@ bool CApp::init() {
     // Can't do these in initlist; need renderer
 
     //gameObjects.insert(GameObjectShared(new Sprite("icon.bmp", {20, 20, 32, 32})));
-    gameObjects.insert(GameObjectShared(new Sprite("smugman-16.gif")));
+    rootObject->addChild(GameObjectShared(new Sprite("smugman-16.gif")));
 
-    gameObjects.insert(GameObjectShared(new Label("test this is srsly a test u guys", "Arial.ttf")));
+    rootObject->addChild(GameObjectShared(new Label("test this is srsly a test u guys", "Arial.ttf")));
+
+    for(int i = 0; i < map.getRows(); i++) {
+        for(int j = 0; j < map.getCols(); j++) {
+            TileShared t = map.get(i, j).lock();
+
+            auto sprite = SpriteShared(new Sprite("smugman-16.gif"));
+            t->setSprite(sprite);
+            sprite->move({i * map.getSize(), j * map.getSize()});
+            rootObject->addChild(sprite);
+
+            sprite->setVisible(t->getDerp());
+        }
+    }
 
     return true;
 }
@@ -84,28 +94,13 @@ void CApp::render() {
     rect.w = map.getSize();
     rect.h = map.getSize();
     
-    for(int i = 0; i < map.getRows(); i++) {
-        for(int j = 0; j < map.getCols(); j++) {
-            TileShared t = map.get(i, j).lock();
-            if(t->getDerp()) {
-                //rect.x = i * map.getSize();
-                //rect.y = j * map.getSize();
-                //video->drawRect(rect);
-                auto sprite = GameObjectShared(new Sprite("smugman-16.gif"));
-                sprite->move({i * map.getSize(), j * map.getSize()});
-                sprite->paint();
-            }
-        }
-    }
     
-    for(GameObjectShared g : gameObjects) {
-       debug("attempt");
-       if(LabelShared l = dynamic_pointer_cast<Label>(g)){
-           debug("did it");
-           l->move({50,50});
-       }
+    debug("here");
+     
+    for(auto& g : *rootObject) {
        g->paint();
     }
+    
  
     // Up until now everything was drawn behind the scenes.
     // This will show the new, red contents of the window.
@@ -121,10 +116,14 @@ void CApp::onEvent(SDL_Event* event) {
     if(event->type == SDL_MOUSEBUTTONDOWN) {
         TileShared t = map.getFromPixels(event->button.x, event->button.y).lock();
         t->setDerp(!t->getDerp());
+        t->getSprite()->setVisible(t->getDerp());
 
-        for(GameObjectShared g : gameObjects) {
-            if(Label * l = dynamic_cast<Label*>(g.get()))
+        for(auto& g : *rootObject) {
+            debug("event");
+            if(LabelShared l = dynamic_pointer_cast<Label>(g)) {
                 l->move({event->button.x, event->button.y});
+                debug("hey");
+            }
         }
     }
 }

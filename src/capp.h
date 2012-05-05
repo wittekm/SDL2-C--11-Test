@@ -58,7 +58,7 @@ private:
 
     LocationMap map;
     // Sort this set by Z-index
-    std::set<GameObjectShared, bool(*)(GameObjectShared, GameObjectShared)> gameObjects;
+    CompositeGameObjectShared rootObject;
 
     // Disable copy
     CApp (const CApp&);

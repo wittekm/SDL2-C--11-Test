@@ -8,13 +8,13 @@
 #include "CompositeGameObject.h"
 
 CompositeGameObject::CompositeGameObject() :
+// sorting algorithm: by z-index, then by ptr value (who cares)
 gameObjects(
-  [](GameObjectShared a, GameObjectShared b) {return a->getZ() < b->getZ();}
+  [](GameObjectShared a, GameObjectShared b) {
+    return a->getZ() < b->getZ() ? true : a < b;
+  }
 )
-{
-    // TODO Auto-generated constructor stub
-
-}
+{ }
 
 CompositeGameObject::~CompositeGameObject() {
     for(GameObjectShared gameObject : gameObjects)
@@ -22,7 +22,7 @@ CompositeGameObject::~CompositeGameObject() {
 }
 
 void CompositeGameObject::paint() {
-    for(GameObjectShared gameObject : gameObjects)
+    for(auto& gameObject : gameObjects)
         gameObject->paint();
 }
 

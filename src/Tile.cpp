@@ -8,11 +8,13 @@
  */
 
 #include "Tile.h"
+#include "Sprite.h"
 
 Tile::Tile():
 row(-1),
 col(-1),
-derp(0)
+derp(0),
+sprite(/*new Sprite("smugman-16.gif")*/)
 {
 
 }
@@ -30,3 +32,6 @@ void Tile::setDerp(const int& d) {
 }
 
 int Tile::getDerp() { return derp; }
+
+SpriteShared Tile::getSprite() { return sprite; }
+void Tile::setSprite(const SpriteShared& s) { sprite = s; }

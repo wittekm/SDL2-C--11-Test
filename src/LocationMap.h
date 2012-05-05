@@ -35,7 +35,7 @@ public:
 private:
     int rows, cols, size;
     std::vector< std::vector<TileShared>> tiles;
-    
+
     typedef std::vector<std::vector<TileShared>>::iterator RowIter;
     typedef std::vector<TileShared>::iterator ColIter;
 };

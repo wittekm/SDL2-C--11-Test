@@ -19,15 +19,6 @@ template <class Key, class SharedPtr>
 Manager<Key, SharedPtr>::Manager() { }
 
 template <class Key, class SharedPtr>
-Manager<Key, SharedPtr> * Manager<Key, SharedPtr>::get() {
-    static Manager * manager;
-    if(!manager)
-        manager = new Manager();
-
-    return manager;
-}
-
-template <class Key, class SharedPtr>
 SharedPtr Manager<Key, SharedPtr>::getObject(const Key& key) {
     auto iter = objectMap.find(key);
     if(iter == objectMap.end())
@@ -46,5 +37,6 @@ template <class Key, class SharedPtr>
 void Manager<Key, SharedPtr>::addObject(const Key& key, const SharedPtr& ptr) {
     objectMap.insert(MapPair(key, ptr));
 }
+
 
 #endif
