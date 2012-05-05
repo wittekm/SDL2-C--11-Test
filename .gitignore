@@ -8,3 +8,7 @@ src/.CompositeGameObject.cpp.swp
 src/.GameObject.cpp.swp
 
 src/test2
+
+src/Makefile.bak
+
+src/Sdl2Cpp11Test
