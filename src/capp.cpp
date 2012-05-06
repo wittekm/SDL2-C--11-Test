@@ -28,33 +28,23 @@ video(SdlVideo::get()),
 textureManager(new TextureManager(video->getRenderer())),
 fontManager(new FontManager(video->getRenderer())),
 running(true),
-map(8, 9, 24),
 // sorting algorithm: by z-index, then by ptr value (who cares)
 rootObject(new CompositeGameObject())
 { }
 
 // TODO: strip out the window and renderer into something else!
 bool CApp::init() {
-    // Can't do these in initlist; need renderer
 
-    //gameObjects.insert(GameObjectShared(new Sprite("icon.bmp", {20, 20, 32, 32})));
     rootObject->addChild(GameObjectShared(new Sprite("smugman-16.gif")));
 
     rootObject->addChild(GameObjectShared(new Label("test this is srsly a test u guys", "Arial.ttf")));
 
-    for(int i = 0; i < map.getRows(); i++) {
-        for(int j = 0; j < map.getCols(); j++) {
-            TileShared t = map.get(i, j).lock();
+    // locMap unfortunately requires wrapping in a sharedPtr before init
+    auto locMap = LocationMapShared(new LocationMap(8, 9, 24));
+    locMap->init();
+    rootObject->addChild(locMap);
 
-            auto sprite = SpriteShared(new Sprite("smugman-16.gif"));
-            t->setSprite(sprite);
-            sprite->move({i * map.getSize(), j * map.getSize()});
-            rootObject->addChild(sprite);
-
-            sprite->setVisible(t->getDerp());
-        }
-    }
-
+    debug("Init complete");
     return true;
 }
  
@@ -89,18 +79,14 @@ void CApp::render() {
     video->setDrawColor(0, 0, 0, 255);
     video->clear();
     
-    video->setDrawColor(0, 255, 255, 255);
+    /*video->setDrawColor(0, 255, 255, 255);
     SDL_Rect rect;
     rect.w = map.getSize();
-    rect.h = map.getSize();
-    
-    
-    debug("here");
+    rect.h = map.getSize();*/
      
     for(auto& g : *rootObject) {
        g->paint();
     }
-    
  
     // Up until now everything was drawn behind the scenes.
     // This will show the new, red contents of the window.
@@ -114,17 +100,17 @@ void CApp::onEvent(SDL_Event* event) {
     if(event->type == SDL_QUIT)
         running = false;
     if(event->type == SDL_MOUSEBUTTONDOWN) {
-        TileShared t = map.getFromPixels(event->button.x, event->button.y).lock();
-        t->setDerp(!t->getDerp());
-        t->getSprite()->setVisible(t->getDerp());
-
+        
+        // Label movement (for fun!) 
         for(auto& g : *rootObject) {
-            debug("event");
             if(LabelShared l = dynamic_pointer_cast<Label>(g)) {
                 l->move({event->button.x, event->button.y});
                 debug("hey");
             }
         }
+
+        // Executes reactToEvent on every GameObject.
+        rootObject->reactToEvent(event);
     }
 }
 

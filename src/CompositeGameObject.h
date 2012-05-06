@@ -25,6 +25,8 @@ public:
     GameObjectsSet::iterator begin() { return gameObjects.begin(); }
     GameObjectsSet::iterator end() { return gameObjects.end(); }
 
+    virtual bool reactToEvent(const SDL_Event*);
+
 private:
     GameObjectsSet gameObjects;
 };

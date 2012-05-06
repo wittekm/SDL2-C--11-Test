@@ -15,6 +15,7 @@ class Label;
 class GameObject;
 class CompositeGameObject;
 class Sprite;
+class LocationMap;
 
 class SDL_Window;
 class SDL_Renderer;
@@ -47,6 +48,12 @@ typedef std::shared_ptr< CompositeGameObject >
   CompositeGameObjectShared;
 typedef std::weak_ptr< CompositeGameObject > 
   CompositeGameObjectWeak;
+
+typedef std::shared_ptr< LocationMap > 
+  LocationMapShared;
+typedef std::weak_ptr< LocationMap > 
+  LocationMapWeak;
+
 
 
 #endif

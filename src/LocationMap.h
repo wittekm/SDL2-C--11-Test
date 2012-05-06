@@ -12,18 +12,19 @@
 #include "includes.h"
 #include "Tile.h"
 #include <vector>
+#include "CompositeGameObject.h"
 
-
-class LocationMap {
+class LocationMap : public CompositeGameObject {
 
 public:
     LocationMap(int rows, int cols, int size);
-    void initTiles();
+
+    // You MUST call init after wrapping LocationMap in a sharedptr.
+    void init();
     
     // Get a reference to a tile. Const correctness can s my d.
-    TileWeak get(int row, int col);
-    TileWeak getFromPixels(int x, int y);
-    
+    TileShared get(int row, int col);
+    TileShared getFromPixels(int x, int y);
     
     int getRows();
     int getCols();
@@ -31,6 +32,7 @@ public:
     
     static bool adjacent(const Tile& a, const Tile& b);
     
+    virtual bool reactToEvent(const SDL_Event*);
     
 private:
     int rows, cols, size;

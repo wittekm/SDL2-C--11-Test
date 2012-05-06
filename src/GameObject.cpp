@@ -54,3 +54,13 @@ GameObjectShared GameObject::getParent() {
 void GameObject::setVisible(bool b) {
     visible = b;
 }
+bool GameObject::getVisible() { return visible; }
+
+int GameObject::getZ() { return z; }
+void GameObject::setZ(int i) { z = i; }
+
+SDL_Rect GameObject::getRect() { return rect; }
+
+bool GameObject::reactToEvent(const SDL_Event* evt) {
+    return false;
+}

@@ -56,7 +56,6 @@ private:
 
     bool running;
 
-    LocationMap map;
     // Sort this set by Z-index
     CompositeGameObjectShared rootObject;
 

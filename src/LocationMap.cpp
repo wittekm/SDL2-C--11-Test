@@ -12,7 +12,8 @@
 #include <stdexcept>
 #include <functional>
 #include <algorithm>
-#include "CompositeGameObject"
+#include "Sprite.h"
+#include "SDL.h" // for sdl_event
 
 using std::vector;
 using std::for_each;
@@ -23,6 +24,7 @@ class LocationBoundsException : std::exception { };
 
 
 LocationMap::LocationMap(int rows, int cols, int size):
+    CompositeGameObject(),
     rows(rows), 
     cols(cols), 
     size(size),
@@ -30,32 +32,45 @@ LocationMap::LocationMap(int rows, int cols, int size):
 {
     if(!(rows > 0 && cols > 0 && size > 0))
         throw std::invalid_argument("LocationMap initialization: rows, cols, size must be > 0.");
-    initTiles();
-    debug("derp");
 }
 
-void LocationMap::initTiles() {
+void LocationMap::init() {
     bool hi = false;
 
-    for_each(tiles.begin(), tiles.end(), [&hi](vector<TileShared>& col) {
-        for_each(col.begin(), col.end(), [&hi](TileShared& tile) {
+    for_each(tiles.begin(), tiles.end(), [&hi,this](vector<TileShared>& col) {
+        for_each(col.begin(), col.end(), [&hi,this](TileShared& tile) {
             // Closures. Neat! hi is fed in as a reference.
             tile.reset(new Tile());
             hi = !hi;
             tile->setDerp(hi);
+
+            auto sprite = SpriteShared(new Sprite("smugman-16.gif"));
+            sprite->setVisible(tile->getDerp());
+            addChild(sprite);
+            tile->setSprite(sprite);
         } );
     } );
 
+    // Using i/j instead of range-based to moving sprite
+    debug("hey");
+    for(int i = 0; i < rows; i++) {
+        for(int j = 0; j < cols; j++) {
+            TileShared& t = tiles.at(i).at(j);
+            t->getSprite()->move({i*size, j*size});
+        }
+    }
+    debug("ok");
+
 }
 
-TileWeak LocationMap::get(int row, int col) {
+TileShared LocationMap::get(int row, int col) {
     if(row < 0 || col < 0 || row >= rows || col >= cols)
         throw LocationBoundsException();
 
-    return TileWeak(tiles.at(row).at(col));
+    return tiles.at(row).at(col);
 }
 
-TileWeak LocationMap::getFromPixels(int x, int y) {
+TileShared LocationMap::getFromPixels(int x, int y) {
     /*
     x /= Settings::get().devicePixelRatio;
     y /= Settings::get().devicePixelRatio;
@@ -78,5 +93,13 @@ static bool adjacent(const Tile& a, const Tile& b) {
     return (rowDiff <= 1) && (colDiff <= 1) && (rowDiff != colDiff);
 }
 
-//template class LocationMap<Tile>;
+bool LocationMap::reactToEvent(const SDL_Event * evt) {
+    try {
+        TileShared t = getFromPixels(evt->button.x, evt->button.y);
+        t->setDerp(!t->getDerp());
+        t->getSprite()->setVisible(t->getDerp());
+        return true;
+    } catch(LocationBoundsException e) { }
 
+    return false;
+} 

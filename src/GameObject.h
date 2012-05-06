@@ -28,14 +28,19 @@ public:
     void setParent(const GameObjectShared& parent);
     GameObjectShared getParent();
 
-    // Should I do this? Come back later and figure it out.
-    //virtual void preDelete(std::function<void(void)> fn) { fn(); }
+    // Want to spawn an explosion when you die? Now's your chance!
     virtual void preDelete() { }
 
-    int getZ() { return z; }
-    SDL_Rect getRect() { return rect; }
+    int getZ();
+    void setZ(int);
+
+    SDL_Rect getRect();
 
     void setVisible(bool);
+    bool getVisible();
+
+    // Return true if this GameObject picked up the event.
+    virtual bool reactToEvent(const SDL_Event*);
 
 protected:
     TextureShared texture;

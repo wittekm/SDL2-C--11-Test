@@ -25,4 +25,4 @@ $(MAIN): $(OBJECTS)
 	$(CC) $(CFLAGS) $(INCLUDES) -c -o $@ $<
 
 clean:
-	rm *.o $(MAIN)
+	rm *.o; rm $(MAIN)
