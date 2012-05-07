@@ -20,6 +20,7 @@
 #include "Sprite.h"
 #include "Label.h"
 #include "CompositeGameObject.h"
+#include "Player.h"
 
 using std::dynamic_pointer_cast;
  
@@ -43,10 +44,11 @@ bool CApp::init() {
     locMap->init();
     rootObject->addChild(locMap);
 
-    player.reset(new Sprite("smugman-16.gif"));
+    player.reset(new Player());
     rootObject->addChild(player);
 
     rootObject->addChild(GameObjectShared(new Label("test guys", "Arial.ttf")));
+
 
     debug("Init complete");
     return true;
@@ -103,6 +105,7 @@ void CApp::render() {
 void CApp::onLoop() {
     // Update Player
 
+    player->update();
     
     // Update World
 
@@ -112,6 +115,7 @@ void CApp::onLoop() {
 void CApp::onEvent(SDL_Event* event) {
     if(event->type == SDL_QUIT)
         running = false;
+
     if(event->type == SDL_MOUSEBUTTONDOWN) {
         
         // Label movement (for fun!) 
@@ -125,6 +129,8 @@ void CApp::onEvent(SDL_Event* event) {
         // Executes reactToEvent on every GameObject.
         rootObject->reactToEvent(event);
     }
+
+    player->reactToEvent(event);
 }
 
 CApp * CApp::get() {

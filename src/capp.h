@@ -58,7 +58,7 @@ private:
 
     // Sort this set by Z-index
     CompositeGameObjectShared rootObject;
-    GameObjectShared player;
+    PlayerShared player;
     LocationMapShared locMap;
 
     // Disable copy
