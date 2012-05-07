@@ -9,6 +9,9 @@ of a game in SDL1.3 (rechristened SDL2 - think Java 1.5).
 * Figure out a good reason to use transform over for\_each.
 * Figure out what the hell this engine is gonna be for. Galaxian or an Advance Wars clone? _Who knows?_
 
+* Eventually abstract out GameObjects into sometihng like Static, Player and NPCGameObject or something. I dunno. In any case NPCGameObject will need to store a Strategy, which I also have to make!
+* Eventually make a GameObjectFactory?
+
 
 ## Requirements
 * GCC 4.7; not every compiler supports C++11 equally.

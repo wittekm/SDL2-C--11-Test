@@ -87,13 +87,16 @@ int LocationMap::getCols() { return cols; }
 
 int LocationMap::getSize() { return size; }
 
+/*
 static bool adjacent(const Tile& a, const Tile& b) {
     int rowDiff = abs(a.getRow() - b.getRow());
     int colDiff = abs(a.getCol() - b.getCol());
     return (rowDiff <= 1) && (colDiff <= 1) && (rowDiff != colDiff);
 }
+*/
 
 bool LocationMap::reactToEvent(const SDL_Event * evt) {
+    // Tiles don't react to events so don't bother iterating them.
     try {
         TileShared t = getFromPixels(evt->button.x, evt->button.y);
         t->setDerp(!t->getDerp());

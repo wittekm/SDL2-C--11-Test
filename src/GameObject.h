@@ -29,6 +29,8 @@ public:
     GameObjectShared getParent();
 
     // Want to spawn an explosion when you die? Now's your chance!
+    // virtual void preDelete(std::function<void(void)> fn)
+    //   { set predelete function to whatever is passed }
     virtual void preDelete() { }
 
     int getZ();

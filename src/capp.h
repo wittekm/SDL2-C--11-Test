@@ -58,6 +58,8 @@ private:
 
     // Sort this set by Z-index
     CompositeGameObjectShared rootObject;
+    GameObjectShared player;
+    LocationMapShared locMap;
 
     // Disable copy
     CApp (const CApp&);
