@@ -31,7 +31,8 @@ public:
 
 
 protected:
-    SdlVideo();
+    SdlVideo(int fps);
+    SdlVideo() : SdlVideo(60) { };
     virtual ~SdlVideo();
 
     // throws exceptions if need be
@@ -40,6 +41,10 @@ protected:
 private:
     SDL_Window * window;
     SDL_Renderer * renderer;
+
+public:
+    const int fps;
+    const int delayTime;
 
 // Allow singleton template to initialize
 friend class Singleton<SdlVideo>;

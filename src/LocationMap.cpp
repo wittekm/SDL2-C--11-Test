@@ -51,15 +51,13 @@ void LocationMap::init() {
         } );
     } );
 
-    // Using i/j instead of range-based to moving sprite
-    debug("hey");
+    // Using i/j instead of range-based to move around each sprite
     for(int i = 0; i < rows; i++) {
         for(int j = 0; j < cols; j++) {
             TileShared& t = tiles.at(i).at(j);
             t->getSprite()->move({i*size, j*size});
         }
     }
-    debug("ok");
 
 }
 
@@ -96,6 +94,9 @@ static bool adjacent(const Tile& a, const Tile& b) {
 */
 
 bool LocationMap::reactToEvent(const SDL_Event * evt) {
+    if(evt->type != SDL_MOUSEBUTTONDOWN)
+        return false;
+
     // Tiles don't react to events so don't bother iterating them.
     try {
         TileShared t = getFromPixels(evt->button.x, evt->button.y);

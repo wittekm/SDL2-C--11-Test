@@ -23,6 +23,18 @@ class FontManager;
 
 class CApp {
 
+// Associated subclasses
+public:
+    class Time {
+    public:
+        Time();
+        Uint32 oldTime, curTime;
+        float deltaTime;
+    private:
+        void update();
+        friend class CApp;
+    };
+
 public:
     CApp();
     SDL_Renderer * getRenderer();
@@ -47,12 +59,18 @@ public:
         return fontManager;
     }
 
+    const Time& getTime() const {
+        return time;
+    }
+
 private:
     SdlVideo * video;
 
     // Managers
     TextureManager * textureManager;
     FontManager * fontManager;
+
+    Time time;
 
     bool running;
 

@@ -8,6 +8,8 @@
 #include "SdlVideo.h"
 #include "SDL_ttf.h"
 
+// SDL Video Exception
+
 SdlVideoException::SdlVideoException(const std::string& s) :
 std::runtime_error(s)
 { }
@@ -16,9 +18,13 @@ SdlVideoException SdlVideoException::sdlGetError() {
     return SdlVideoException(SDL_GetError());
 }
 
-SdlVideo::SdlVideo() :
+// SDLVideo
+
+SdlVideo::SdlVideo(int fps) :
 window(0),
-renderer(0)
+renderer(0),
+fps(fps),
+delayTime(1000 / fps)
 {
     if(SDL_Init(SDL_INIT_EVERYTHING) < 0)
         throw SdlVideoException("SDL Init Failed");

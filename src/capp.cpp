@@ -28,6 +28,7 @@ CApp::CApp() :
 video(SdlVideo::get()),
 textureManager(new TextureManager(video->getRenderer())),
 fontManager(new FontManager(video->getRenderer())),
+time(),
 running(true),
 // sorting algorithm: by z-index, then by ptr value (who cares)
 rootObject(new CompositeGameObject()),
@@ -61,14 +62,9 @@ int CApp::exec() {
  
     SDL_Event Event;
 
-    Uint32 oldTime, curTime;
-    float deltaTime;
-    curTime = SDL_GetTicks();
-
     while(running) {
-        oldTime = curTime;
-        curTime = SDL_GetTicks();
-        deltaTime = (curTime - oldTime) / 1000.f;
+        time.update();
+        debug(time.deltaTime * 1000.);
 
         while(SDL_PollEvent(&Event)) {
             onEvent(&Event);
@@ -76,7 +72,7 @@ int CApp::exec() {
  
         onLoop();
         render();
-        SDL_Delay(200);
+        SDL_Delay(video->delayTime);
     }
  
     clean();
@@ -98,15 +94,15 @@ void CApp::render() {
     }
  
     // Up until now everything was drawn behind the scenes.
-    // This will show the new, red contents of the window.
+    // This will actually show the new contents of the window.
     video->present();
 }
 
 void CApp::onLoop() {
     // Update Player
-
     player->update();
     
+    // TODO
     // Update World
 
     // Update NPCs
@@ -140,7 +136,20 @@ CApp * CApp::get() {
     return instance;
 }
 
- 
+// Time
+CApp::Time::Time() :
+oldTime(0),
+curTime(SDL_GetTicks()),
+deltaTime()
+{ }
+
+void CApp::Time::update() {
+    oldTime = curTime;
+    curTime = SDL_GetTicks();
+    deltaTime = (curTime - oldTime) / 1000.f;
+} 
+
+// Main function 
 int main(int argc, char* argv[]) {
     CApp * app = CApp::get();
  
